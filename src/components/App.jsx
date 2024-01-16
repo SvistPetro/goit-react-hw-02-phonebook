@@ -1,29 +1,47 @@
 import { Component } from "react";
 import { Form } from 'components/Form/Form';
-import { Contacts } from "./Contacts/Contacts";
+import { ContactList } from "./ContactList/ContactList";
+import { Filter } from "./Filter/Filter";
 
 export class App extends Component {
 
   state = {
     contacts: [],
+    filter: ''
   }
 
-  onSubmitFormHandler = formData => {
-    if(this.state.contacts.length === 0) {
-      this.setState({contacts: [formData]})
+  handleAddContact = formData => {
+
+    const duplicate = this.state.contacts.some(contact => contact.name.toLowerCase() === formData.name.toLowerCase());
+    
+    if(duplicate) {
+      alert(`${formData.name} is already in contacts`);
       return;
     }
+
     this.setState(prevState => {return {contacts: [...prevState.contacts, formData]}});
+  }
+
+  handleDeleteContact = (contactId) => {
+    this.setState({contacts: this.state.contacts.filter(contact => contact.id !== contactId)});
+  }
+
+  handleChangeFilter = (event) => {
+    this.setState({filter: event.target.value});
   }
 
   render() {
 
+    const filteredContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.trim().toLowerCase()));
+
     return (
       <div>
-        <h2>Phonebook</h2>
-        <Form onSubmit={this.onSubmitFormHandler}/>
+        <h1>Phonebook</h1>
+        <Form onSubmit={this.handleAddContact}/>
+
         <h2>Contacts</h2>
-        <Contacts contacts={this.state.contacts}/>
+        <Filter value={this.state.filter} onChange={this.handleChangeFilter}/>
+        <ContactList contacts={filteredContacts} onDelete={this.handleDeleteContact}/>
       </div>
     );
   }

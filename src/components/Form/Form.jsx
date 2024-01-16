@@ -5,24 +5,27 @@ class Form extends Component {
     
     state = {
         name: '',
+        number: ''
     }
 
     onChangeName = (e) => {
-        this.setState({name: e.target.value});
+        this.setState({[e.target.name]: e.target.value});
       }
 
     onSubmitForm = (event) => {
     event.preventDefault();
     const id = nanoid().toString();
-    const name = this.state.name;
-    const finalFormData = {id, name};
+    const name = this.state.name.trim().toString();
+    const number = this.state.number.trim().toString();
+    const finalFormData = {id, name, number};
     this.props.onSubmit(finalFormData);
     this.reset();
     }
 
     reset = () => {
         this.setState({
-            name: ''
+            name: '',
+            number: ''
         })
     }
     
@@ -34,6 +37,10 @@ class Form extends Component {
                     <label htmlFor="name">
                         <span>Name</span>
                         <input type="text" name="name" value={this.state.name} onChange={this.onChangeName} required />
+                    </label>
+                    <label htmlFor="name">
+                        <span>Name</span>
+                        <input type="tel" name="number" value={this.state.number} onChange={this.onChangeName} required />
                     </label>
                     <button type="submit">Add contact</button>
                 </form>
