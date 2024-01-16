@@ -1,4 +1,5 @@
 import { Component } from "react";
+import css from './ContactList.module.css';
 
 class ContactList extends Component {
 
@@ -10,10 +11,10 @@ class ContactList extends Component {
             <ul>
                 {contacts.map(contact => {
                     return (
-                        <li key={contact.id}>
-                            <span>{contact.name}:</span>
-                            <span>{contact.number}</span>
-                            <button onClick={() => onDelete(contact.id)}>Delete</button>
+                        <li key={contact.id} className={css.list}>
+                            <span className={css.name}>{contact.name}:</span>
+                            <span className={css.number}>{contact.number}</span>
+                            <button className={css.button} onClick={() => onDelete(contact.id)}>Delete</button>
                         </li>
                     );
                 })}

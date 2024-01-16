@@ -1,4 +1,5 @@
 import { Component } from "react";
+import css from './Filter.module.css';
 
 class Filter extends Component {
     render() {
@@ -9,7 +10,7 @@ class Filter extends Component {
             <>
                 <label htmlFor="filter">
                     <p>Find contacts by name</p>
-                    <input type="text" name="filter" value={value} onChange={onChange}/>
+                    <input type="text" className={css.input}name="filter" value={value} onChange={onChange}/>
                 </label>
             </>
         )

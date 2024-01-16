@@ -1,4 +1,5 @@
 import { Component } from "react";
+import css from './Form.module.css';
 import { nanoid } from 'nanoid'
 
 class Form extends Component {
@@ -33,16 +34,16 @@ class Form extends Component {
 
         return (
             <>
-                <form onSubmit={this.onSubmitForm}>
-                    <label htmlFor="name">
-                        <span>Name</span>
-                        <input type="text" name="name" value={this.state.name} onChange={this.onChangeName} required />
+                <form className={css.form} onSubmit={this.onSubmitForm}>
+                    <label htmlFor="name" className={css.label}>
+                        <span className={css.name}>Name</span>
+                        <input type="text" name="name" className={css.input} value={this.state.name} onChange={this.onChangeName} required />
                     </label>
-                    <label htmlFor="name">
-                        <span>Name</span>
-                        <input type="tel" name="number" value={this.state.number} onChange={this.onChangeName} required />
+                    <label htmlFor="number" className={css.label}>
+                        <span className={css.name}>Number</span>
+                        <input type="tel" name="number" className={css.input} value={this.state.number} onChange={this.onChangeName} required />
                     </label>
-                    <button type="submit">Add contact</button>
+                    <button type="submit" className={css.button}>Add contact</button>
                 </form>
             </>
         )
